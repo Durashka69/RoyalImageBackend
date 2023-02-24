@@ -2,15 +2,6 @@ version: '3.7'
 
 
 services:
-  db:
-    container_name: db_docs
-    image: postgres:12.0-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    networks:
-      - my-network
-    env_file:
-      - ./.env
 
   web:
     container_name: docs_web
@@ -26,11 +17,23 @@ services:
       - "8000:8000"
     networks:
       - my-network
+
+  nginx:
+    container_name: nginx_barter
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./static/:/static
+      - ./media/:/media
+    networks:
+      - my-network
     depends_on:
-      - db
+      - web
 
 volumes:
-  postgres_data:
   media:
   static:
 
