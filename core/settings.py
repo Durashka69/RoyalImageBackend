@@ -31,7 +31,8 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = eval(env('DEBUG'))
 
-ALLOWED_HOSTS = ['brooklyn.kg', 'localhost']
+# ALLOWED_HOSTS = ['brooklyn.kg', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
